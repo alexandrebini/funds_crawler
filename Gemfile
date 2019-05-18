@@ -11,6 +11,7 @@ gem 'puma', '~> 3.11'
 gem 'oj'
 gem 'sidekiq'
 gem 'typhoeus'
+gem 'watir'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

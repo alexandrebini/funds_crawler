@@ -1,16 +1,18 @@
 class CreateFunds < ActiveRecord::Migration[5.2]
   def change
+    enable_extension 'citext'
+
     create_table :funds do |t|
       t.bigint :tax_id, null: false
 
-      t.string :name, null: false
-      t.string :abbr_name
-      t.string :slug
+      t.citext :name, null: false
+      t.citext :abbr_name
+      t.citext :slug
 
-      t.string :type, null: false, index: true
-      t.string :sub_type, index: true
+      t.citext :type, null: false, index: true
+      t.citext :sub_type, index: true
 
-      t.string :benchmark
+      t.citext :benchmark
 
       t.boolean :qualified_investor_only, index: true
       t.boolean :exclusive, index: true
@@ -19,7 +21,7 @@ class CreateFunds < ActiveRecord::Migration[5.2]
       t.integer :quotaholders
       t.bigint :patrimony
 
-      t.string :situation
+      t.citext :situation
     end
 
     add_index :funds, :tax_id, unique: true
