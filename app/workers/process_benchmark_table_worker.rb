@@ -7,7 +7,7 @@ class ProcessBenchmarkTableWorker < ApplicationWorker
     %I[higher_return benchmark_higher_return float],
     %I[lower_return benchmark_lower_return float],
     [:above_benchmark, nil, :int],
-    [:above_benchmark, nil, :int]
+    [:below_benchmark, nil, :int]
   ].freeze
 
   def perform(fund_id)

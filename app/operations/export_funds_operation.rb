@@ -1,3 +1,5 @@
+require 'csv'
+
 class ExportFundsOperation
   def self.call(options = {})
     new(options).call
