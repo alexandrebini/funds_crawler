@@ -1,6 +1,14 @@
 class ProcessBenchmarkTableWorker < ApplicationWorker
   SELECTOR = '.stats-table-1 tbody tr'.freeze
   CELL_SELECTOR = 'td:not(.table-title)'.freeze
+  ROW_ATTRIBUTES = [
+    %I[positive_months benchmark_positive_months int],
+    %I[negative_months benchmark_negative_months int],
+    %I[higher_return benchmark_higher_return float],
+    %I[lower_return benchmark_lower_return float],
+    [:above_benchmark, nil, :int],
+    [:above_benchmark, nil, :int]
+  ].freeze
 
   def perform(fund_id)
     @fund_id = fund_id
@@ -13,15 +21,6 @@ class ProcessBenchmarkTableWorker < ApplicationWorker
   private
 
   attr_accessor :fund_id
-
-  ROW_ATTRIBUTES = [
-    %I[positive_months benchmark_positive_months int],
-    %I[negative_months benchmark_negative_months int],
-    %I[higher_return benchmark_higher_return float],
-    %I[lower_return benchmark_lower_return float],
-    [:above_benchmark, nil, :int],
-    [:above_benchmark, nil, :int]
-  ].freeze
 
   def fund
     @fund ||= Fund.find_by(id: fund_id)
