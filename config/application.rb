@@ -33,6 +33,7 @@ module FundsCrawler
     config.api_only = true
 
     config.autoload_paths += [
+      Rails.root.join('lib'),
       Rails.root.join('app', 'operations'),
       Rails.root.join('app', 'workers')
     ]

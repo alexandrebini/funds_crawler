@@ -1,19 +1,22 @@
 class ProcessStatsTableWorker < ApplicationWorker
-  def perform(fund_id, html)
+  SELECTOR = 'table.stats-table-2'.freeze
+
+  def perform(fund_id)
     @fund_id = fund_id
     @html = html
-    return if fund.blank?
+    return if fund.blank? || !fund.scraped?
 
   end
 
   private
 
-  attr_accessor :fund_id, :html
+  attr_accessor :fund_id
 
   def fund
     @fund ||= Fund.find_by(id: fund_id)
   end
 end
+
 
 # <table class="stats-table-2">
 #   <thead>

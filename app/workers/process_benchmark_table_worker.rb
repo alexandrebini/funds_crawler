@@ -1,20 +1,55 @@
 class ProcessBenchmarkTableWorker < ApplicationWorker
-  def perform(fund_id, html)
-    @fund_id = fund_id
-    @html = html
-    return if fund.blank?
+  SELECTOR = '.stats-table-1 tbody tr'.freeze
+  CELL_SELECTOR = 'td:not(.table-title)'.freeze
 
+  def perform(fund_id)
+    @fund_id = fund_id
+    return if fund.blank? || !fund.scraped?
+    return if attributes.blank?
+
+    fund.update(attributes)
   end
 
   private
-  SELECTOR = 'table.stats-table-1'.freeze
-  attr_accessor :fund_id, :html
+
+  attr_accessor :fund_id
+
+  ROW_ATTRIBUTES = [
+    %I[positive_months benchmark_positive_months int],
+    %I[negative_months benchmark_negative_months int],
+    %I[higher_return benchmark_higher_return float],
+    %I[lower_return benchmark_lower_return float],
+    [:above_benchmark, nil, :int],
+    [:above_benchmark, nil, :int]
+  ].freeze
 
   def fund
     @fund ||= Fund.find_by(id: fund_id)
   end
-end
 
+  def doc
+    @doc ||= Nokogiri::HTML.parse(fund.html)
+  end
+
+  def attributes
+    @attributes ||= doc.css(SELECTOR).each_with_index.map do |row, index|
+      parse_row(row, index)
+    end.flatten(1).to_h.compact
+  end
+
+  def parse_row(row, index)
+    value_cell, benchmark_value_cell = row.css(CELL_SELECTOR).to_a.last(2)
+    value_attribute, benchmark_attribute, type = ROW_ATTRIBUTES[index]
+
+    value = ExtractNumber.send(type, value_cell.text)
+    benchmark_value = ExtractNumber.send(type, benchmark_value_cell&.text)
+
+    [
+      [value_attribute, value],
+      [benchmark_attribute, benchmark_value]
+    ]
+  end
+end
 
 # <table class="stats-table-1">
 #   <thead>
