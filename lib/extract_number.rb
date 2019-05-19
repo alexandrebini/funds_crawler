@@ -1,6 +1,6 @@
 module ExtractNumber
   class << self
-    MATCHER = /(-?\d+[,.]?\d+)/
+    MATCHER = /(-?\d+[,.]?\d+)/.freeze
 
     def float(str)
       parse(str)&.to_f
@@ -13,7 +13,7 @@ module ExtractNumber
     private
 
     def parse(str)
-      return unless str.present?
+      return if str.blank?
 
       number_match = str.scan(MATCHER).flatten.first
       return unless number_match

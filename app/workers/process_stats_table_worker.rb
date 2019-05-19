@@ -40,7 +40,6 @@ class ProcessStatsTableWorker < ApplicationWorker
   end
 end
 
-
 # <table class="stats-table-2">
 #   <thead>
 #     <tr>
@@ -49,7 +48,7 @@ end
 #       <th class="table-title">12 Meses</th>
 #       <th class="table-title">24 Meses</th>
 #       <th class="table-title only-desk">36 Meses</th>
-#       <th class="table-title">Desde o Início</th>
+#       <th class="table-title">Desde o Inicio</th>
 #     </tr>
 #   </thead>
 #   <tbody>
@@ -70,7 +69,7 @@ end
 #       <td>0,22%</td>
 #     </tr>
 #     <tr>
-#       <td class="table-title">Índice de Sharpe</td>
+#       <td class="table-title">Indice de Sharpe</td>
 #       <td>-1,98</td>
 #       <td>-</td>
 #       <td>-</td>

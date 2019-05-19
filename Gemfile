@@ -6,9 +6,9 @@ gem 'rails', '~> 5.2.3'
 
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'nokogiri'
+gem 'oj'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
-gem 'oj'
 gem 'sidekiq'
 gem 'typhoeus'
 gem 'watir'

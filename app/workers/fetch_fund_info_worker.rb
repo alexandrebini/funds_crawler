@@ -68,10 +68,10 @@ end
 #   "admin_cnpj": 90400888000142,
 #   "admin_nome": "BANCO SANTANDER (BRASIL) S.A.",
 #   "gestor_cnpj": 10231177000152,
-#   "gestor_nome": "SANTANDER BRASIL GESTÃO DE RECURSOS LTDA",
+#   "gestor_nome": "SANTANDER BRASIL GESTAO DE RECURSOS LTDA",
 #   "cvm_classe": "Renda Fixa",
 #   "situacao": "EM FUNCIONAMENTO NORMAL",
 #   "patrimonio": 1485013546.43,
 #   "cotistas": 6308,
-#   "classe": "Duração Média Soberano"
+#   "classe": "Duracao Media Soberano"
 # }
